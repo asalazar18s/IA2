@@ -33,6 +33,7 @@ public class Main {
 
     public String GenAlgorithm(ArrayList<Chromosome> population){
         population = Population;
+        // TODO: check fit value of first element in list if its already sorted because if there is a 28 its over
 
         for(int j = 0; j < 200000; j ++) {
             ArrayList<Chromosome>newGen = new ArrayList<>();
@@ -59,6 +60,7 @@ public class Main {
             Collections.sort(population);
 
         }
+        // TODO: I might not need this.
         int max = 0;
         int indexOfMax = 0;
         for (int counter = 0; counter < population.size(); counter++)
@@ -102,6 +104,7 @@ public class Main {
         // La probabilidad de mutación de un gen en la cromosoma debe ser de 0.01
         // La posición del gen en el cromosoma que va a mutar debe ser seleccionado
         // aleatoriamente.
+        // TODO: Validate if this is working properly
         int n = child.chromosome.size();
         // gen random value in range of n
         int valToChange = ThreadLocalRandom.current().nextInt(0, n + 1);
