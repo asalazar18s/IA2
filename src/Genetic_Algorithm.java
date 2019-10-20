@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Random;
 
-public class Main {
+public class Genetic_Algorithm {
     ArrayList<Chromosome> Population = new ArrayList<>();
 
-    public Main (){}
+    public Genetic_Algorithm(){}
 
-    public Main(ArrayList<Chromosome> population) {
+    public Genetic_Algorithm(ArrayList<Chromosome> population) {
         Population = population;
     }
 
@@ -20,20 +20,23 @@ public class Main {
             Integer[] newIndividual = new Integer[8];
             ArrayList<Integer> list = Fisher_Yates_Array_Shuffling.getValuesAsArray(newIndividual, 8);
             Chromosome new_Chromosome = new Chromosome(list);
-            System.out.println(new_Chromosome.getFitnessValue() + " : " + new_Chromosome.getChromosome());
+            //System.out.println(new_Chromosome.getFitnessValue() + " : " + new_Chromosome.getChromosome());
             Population.add(new_Chromosome);
         }
-        System.out.println("\n");
+        //System.out.println("\n");
         Collections.sort(Population);
-        for (int i = 0; i < Population.size(); i ++){
+        /*for (int i = 0; i < Population.size(); i ++){
             Chromosome aaron = Population.get(i);
             System.out.println(aaron.toString());
-        }
+        }*/
     }
 
     public String GenAlgorithm(ArrayList<Chromosome> population){
         population = Population;
         // TODO: check fit value of first element in list if its already sorted because if there is a 28 its over
+        if(population.get(0).getFitnessValue() == 28){
+            return population.get(0).toString();
+        }
 
         for(int j = 0; j < 200000; j ++) {
             ArrayList<Chromosome>newGen = new ArrayList<>();
@@ -56,23 +59,23 @@ public class Main {
                     return child.toString();
                 }
             }
-            population.addAll(newGen);
+            // set newgen as next population to look into
+
+            population = newGen;
+            Population = newGen;
+
             Collections.sort(population);
+            Collections.sort(Population);
+            System.out.println("Generation: " + j);
+            System.out.println("With Size: " + population.size());
+            System.out.println("Best Specimen:");
+            System.out.println(population.get(0).toString() + "\n");
 
         }
         // TODO: I might not need this.
-        int max = 0;
-        int indexOfMax = 0;
-        for (int counter = 0; counter < population.size(); counter++)
-        {
-            if (population.get(counter).getFitnessValue() > max)
-            {
-                max = population.get(counter).getFitnessValue();
-                indexOfMax = counter;
-            }
-        }
 
-        return population.get(indexOfMax).toString();
+
+        return population.get(0).toString();
     }
 
 
@@ -107,7 +110,7 @@ public class Main {
         // TODO: Validate if this is working properly
         int n = child.chromosome.size();
         // gen random value in range of n
-        int valToChange = ThreadLocalRandom.current().nextInt(0, n + 1);
+        int valToChange = ThreadLocalRandom.current().nextInt(0, n);
 
         int newVal = ThreadLocalRandom.current().nextInt(1, 8);
 

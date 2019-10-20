@@ -6,8 +6,6 @@
  * and open the template in the editor.
  */
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -115,7 +113,7 @@ public class Fisher_Yates_Array_Shuffling {
         Olivia.add(c);
         Olivia.add(e);
         Olivia.add(g);
-        Main aaron = new Main(Olivia);
+        Genetic_Algorithm aaron = new Genetic_Algorithm(Olivia);
 
         Collections.sort(aaron.Population);
 
@@ -123,9 +121,9 @@ public class Fisher_Yates_Array_Shuffling {
             System.out.println(str.getFitnessValue());
         }*/
 
-        Main aaron = new Main();
+        Genetic_Algorithm aaron = new Genetic_Algorithm();
         aaron.getInitPopulation();
-        aaron.GenAlgorithm(aaron.Population);
+        System.out.println(aaron.GenAlgorithm(aaron.Population));
 
 
     }
