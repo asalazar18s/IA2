@@ -1,10 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Random;
 
 public class Main {
     ArrayList<Chromosome> Population = new ArrayList<>();
+
+    public Main (){}
 
     public Main(ArrayList<Chromosome> population) {
         Population = population;
@@ -17,11 +20,18 @@ public class Main {
             Integer[] newIndividual = new Integer[8];
             ArrayList<Integer> list = Fisher_Yates_Array_Shuffling.getValuesAsArray(newIndividual, 8);
             Chromosome new_Chromosome = new Chromosome(list);
+            System.out.println(new_Chromosome.getFitnessValue() + " : " + new_Chromosome.getChromosome());
             Population.add(new_Chromosome);
+        }
+        System.out.println("\n");
+        Collections.sort(Population);
+        for (int i = 0; i < Population.size(); i ++){
+            Chromosome aaron = Population.get(i);
+            System.out.println(aaron.toString());
         }
     }
 
-    public String GenAlgorithm(ArrayList<Chromosome> population, double fitFn){
+    public String GenAlgorithm(ArrayList<Chromosome> population){
         population = Population;
 
         for(int j = 0; j < 200000; j ++) {
@@ -46,6 +56,7 @@ public class Main {
                 }
             }
             population.addAll(newGen);
+            Collections.sort(population);
 
         }
         int max = 0;
@@ -70,15 +81,19 @@ public class Main {
         int randomNum = ThreadLocalRandom.current().nextInt(0, n + 1);
 
         // get first part of the child to be appended to final child
-        List childPart1 = x.chromosome.subList(0, randomNum);
-        ArrayList<Integer> ChildPart1toappend = new ArrayList<Integer>(childPart1);
+        ArrayList<Integer> childPart1 = new ArrayList<Integer>(x.chromosome.subList(0, randomNum));
 
         // get second part of the child to be appended to final child
-        List childPart2 = y.chromosome.subList(randomNum, n);
+        ArrayList<Integer> childPart2 = new ArrayList<Integer>(y.chromosome.subList(randomNum, n));
         ArrayList<Integer> ChildPart2toappend = new ArrayList<Integer>(childPart2);
 
-        child.chromosome.addAll(childPart1);
-        child.chromosome.addAll(childPart2);
+
+        for(int i = 0; i < childPart1.size(); i ++){
+            child.chromosome.add(childPart1.get(i));
+        }
+        for(int i = 0; i < childPart2.size(); i ++){
+            child.chromosome.add((Integer) childPart2.get(i));
+        }
 
         return child;
     }

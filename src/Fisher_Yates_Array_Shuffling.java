@@ -7,6 +7,7 @@
  */
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -50,7 +51,7 @@ public class Fisher_Yates_Array_Shuffling {
         ArrayList<Integer> toReturn = new ArrayList<>();
 
         for(int i = 0; i < a.length; i ++){
-            toReturn.add(a[i]);
+            toReturn.add(resObj[i]);
         }
 
         return toReturn;
@@ -60,7 +61,7 @@ public class Fisher_Yates_Array_Shuffling {
 
     public static void main(String agrs[]) {
 
-        //call methods
+/*        //call methods
         Chromosome a = new Chromosome();
         ArrayList<Integer> b = new ArrayList<Integer>();
         b.add(2);
@@ -120,7 +121,12 @@ public class Fisher_Yates_Array_Shuffling {
 
         for(Chromosome str: aaron.Population){
             System.out.println(str.getFitnessValue());
-        }
+        }*/
+
+        Main aaron = new Main();
+        aaron.getInitPopulation();
+        aaron.GenAlgorithm(aaron.Population);
+
 
     }
 

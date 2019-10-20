@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Chromosome implements Comparable{
-    ArrayList<Integer> chromosome;
+    ArrayList<Integer> chromosome = new ArrayList<>();
     Integer FitnessValue;
 
 
@@ -27,6 +27,7 @@ public class Chromosome implements Comparable{
     }
 
     public Integer getFitnessValue() {
+        setFitnessValue(CalculateFitnessValue());
         return FitnessValue;
     }
 
@@ -78,4 +79,8 @@ public class Chromosome implements Comparable{
 
     }
 
+    @Override
+    public String toString() {
+        return "Fitness : Chromosome\n" + "  " + getFitnessValue()+ "    : " + getChromosome();
+    }
 }
