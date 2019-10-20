@@ -6,6 +6,10 @@ import java.util.Random;
 public class Main {
     ArrayList<Chromosome> Population = new ArrayList<>();
 
+    public Main(ArrayList<Chromosome> population) {
+        Population = population;
+    }
+
 
     public void getInitPopulation(){
         // Generates initial pòpulation of 30 candidates / individuals.

@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -64,16 +65,62 @@ public class Fisher_Yates_Array_Shuffling {
         ArrayList<Integer> b = new ArrayList<Integer>();
         b.add(2);
         b.add(4);
+        b.add(7);
         b.add(4);
-        b.add(1);
+        b.add(8);
         b.add(5);
-        b.add(1);
+        b.add(5);
         b.add(2);
-        b.add(4);
-
         a.setChromosome(b);
 
-        System.out.println(a.CalculateFitnessValue());
+        Chromosome c = new Chromosome();
+        ArrayList<Integer> d = new ArrayList<Integer>();
+        d.add(3);
+        d.add(2);
+        d.add(7);
+        d.add(5);
+        d.add(2);
+        d.add(4);
+        d.add(1);
+        d.add(1);
+        c.setChromosome(d);
+
+        Chromosome e = new Chromosome();
+        ArrayList<Integer> f = new ArrayList<Integer>();
+        f.add(2);
+        f.add(4);
+        f.add(4);
+        f.add(1);
+        f.add(5);
+        f.add(1);
+        f.add(2);
+        f.add(4);
+        e.setChromosome(f);
+
+        Chromosome g = new Chromosome();
+        ArrayList<Integer> h = new ArrayList<Integer>();
+        h.add(3);
+        h.add(2);
+        h.add(5);
+        h.add(4);
+        h.add(3);
+        h.add(2);
+        h.add(1);
+        h.add(3);
+        g.setChromosome(h);
+
+        ArrayList<Chromosome> Olivia = new ArrayList<>();
+        Olivia.add(a);
+        Olivia.add(c);
+        Olivia.add(e);
+        Olivia.add(g);
+        Main aaron = new Main(Olivia);
+
+        Collections.sort(aaron.Population);
+
+        for(Chromosome str: aaron.Population){
+            System.out.println(str.getFitnessValue());
+        }
 
     }
 
