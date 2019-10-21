@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Genetic_Algorithm {
     ArrayList<Chromosome> Population = new ArrayList<>();
+    Integer NumOf200kGens = 0;
 
     public Genetic_Algorithm(){}
 
@@ -16,6 +17,7 @@ public class Genetic_Algorithm {
 
     public void getInitPopulation(){
         // Generates initial pòpulation of 30 candidates / individuals.
+        Population.clear();
         for (int i = 0; i < 30; i ++){
             Integer[] newIndividual = new Integer[8];
             ArrayList<Integer> list = Fisher_Yates_Array_Shuffling.getValuesAsArray(newIndividual, 8);
@@ -23,23 +25,20 @@ public class Genetic_Algorithm {
             //System.out.println(new_Chromosome.getFitnessValue() + " : " + new_Chromosome.getChromosome());
             Population.add(new_Chromosome);
         }
-        //System.out.println("\n");
         Collections.sort(Population);
-        /*for (int i = 0; i < Population.size(); i ++){
-            Chromosome aaron = Population.get(i);
-            System.out.println(aaron.toString());
-        }*/
+
     }
 
-    public String GenAlgorithm(ArrayList<Chromosome> population){
-        population = Population;
+    public String GenAlgorithm(){
+        ArrayList<Chromosome> population = Population;
         // TODO: check fit value of first element in list if its already sorted because if there is a 28 its over
         if(population.get(0).getFitnessValue() == 28){
+            System.out.println("Perfect Configuration Gen: 0" + " Num of 200k generations: " + NumOf200kGens);
             return population.get(0).toString();
         }
 
         for(int j = 0; j < 200000; j ++) {
-            ArrayList<Chromosome>newGen = new ArrayList<>();
+            ArrayList<Chromosome> newGen = new ArrayList<>();
             for (int i = 0; i < population.size(); i++) {
                 // get random value the size of list of population to get both parents
                 Chromosome parent1 = rouletteWheelSelection();
@@ -55,7 +54,8 @@ public class Genetic_Algorithm {
                 }
                 newGen.add(child);
 
-                if (child.getFitnessValue() == 28){
+                if (child.getFitnessValue() == 28) {
+                    System.out.println("Perfect Configuration " + "Gen: " + j + " Num of 200k generations: " + NumOf200kGens);
                     return child.toString();
                 }
             }
@@ -66,16 +66,22 @@ public class Genetic_Algorithm {
 
             Collections.sort(population);
             Collections.sort(Population);
-            System.out.println("Generation: " + j);
-            System.out.println("With Size: " + population.size());
-            System.out.println("Best Specimen:");
-            System.out.println(population.get(0).toString() + "\n");
+            if(j % 10000 == 0){
+                System.out.println("Generation: " + j + "; Num of 200k generations: " + NumOf200kGens);
+                System.out.println("Best Specimen:");
+                System.out.println(population.get(0).toString() + "\n");
+            }
 
         }
-        // TODO: I might not need this.
+        // Comment the next four lines if you want to just get the best configuration after 200k iterations
+        System.out.println("\n\n\nNew Initial Population\n\n\n");
+        NumOf200kGens += 1;
+        getInitPopulation();
+        return GenAlgorithm();
 
-
-        return population.get(0).toString();
+        // Uncomment if you want the best configuration after 200k iterations
+        //System.out.println("Best Configuration");
+        //return population.get(0).toString();
     }
 
 
